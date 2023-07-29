@@ -10,16 +10,28 @@
     <form method="POST">
         {% csrf_token %}
         {{ form.non_field_errors }}
-        {% for field in form %}
-        {{ field.label }}
-        {{ field }}
-        {{ field.errors }}
-        <br>
-        {% endfor %}
+        <div class="form-fields">
+            {% for field in form %}
+            <div class="form-field">
+                {{ field.label }}
+                {{ field }}
+                {{ field.errors }}
+            </div>
+            {% endfor %}
+        </div>
         <div class="mt-3">
             <button type="submit" class="btn btn-primary">Create</button>
             <a href="{% url 'accounts:index' %}" class="btn btn-secondary">Back</a>
         </div>
     </form>
 </div>
+<style>
+    /* スタイルを定義する */
+    .form-fields {
+        text-align: center;
+    }
+    .form-field {
+        margin-bottom: 10px;
+    }
+</style>
 {% endblock %}
