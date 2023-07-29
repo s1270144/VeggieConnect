@@ -5,6 +5,7 @@
 - Language：Python, Solidity
 - Version：3.9.7
 - VScode：1.77.1
+- OS：macOS 13.4.1
 
 ### フレームワーク
 
