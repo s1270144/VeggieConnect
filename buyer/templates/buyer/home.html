@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .user-info {
+            background-color: #f0f0f0;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .purchase-list-btn {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .search-box {
+            margin: 20px 0;
+        }
+
+        .toggle-mode-btn {
+            background-color: #28a745;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="user-info">
+        <h1>User Information</h1>
+        <!-- ここにユーザ情報を表示するためのコードを追加 -->
+        <p>ユーザ名：John Doe</p>
+        <p>Email：johndoe@example.com</p>
+        <p>会員ステータス：Gold</p>
+    </div>
+
+    <div>
+        <a href="#" class="purchase-list-btn">購入一覧表示</a>
+    </div>
+
+    <div class="search-box">
+        <!-- 検索ボックスのコードを追加 -->
+        <input type="text" placeholder="検索キーワードを入力してください">
+        <button type="submit">検索</button>
+    </div>
+
+    <div>
+        <button class="toggle-mode-btn">出品モード切替</button>
+    </div>
+</body>
+</html>
+{% endblock %}

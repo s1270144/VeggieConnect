@@ -18,6 +18,7 @@ class UserManager(BaseUserManager):
         extra_fields.setdefault('is_active', True)
         extra_fields.setdefault('is_staff', False)
         extra_fields.setdefault('is_superuser', False)
+        extra_fields.setdefault('is_seller', False)
         return self._create_user(
             email=email,
             account_id=account_id,
@@ -29,6 +30,7 @@ class UserManager(BaseUserManager):
         extra_fields['is_active'] = True
         extra_fields['is_staff'] = True
         extra_fields['is_superuser'] = True
+        extra_fields['is_seller'] = True
         return self._create_user(
             email=email,
             account_id=account_id,
@@ -73,6 +75,10 @@ class User(AbstractBaseUser, PermissionsMixin):
         verbose_name=_('staff status'),
         default=False,
     )
+    is_seller = models.BooleanField(
+        verbose_name=_('seller status'),
+        default=False,
+    )
     is_active = models.BooleanField(
         verbose_name=_('active'),
         default=True,
@@ -93,4 +99,3 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     def __str__(self):
         return self.account_id
-

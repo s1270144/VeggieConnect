@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}
 {% if user.is_authenticated %}
@@ -16,4 +17,11 @@
 <a href="{% url 'accounts:signup' %}" class="btn btn-primary">Signup</a>
 <a href="{% url 'accounts:login' %}" class="btn btn-primary">Login</a>
 {% endif %}
+<style>
+    body {
+        background-image: url("{% static 'images/blueberry.jpg' %}");
+        background-size: cover;
+    }
+
+</style>
 {% endblock %}
