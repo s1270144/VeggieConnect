@@ -116,7 +116,7 @@
             <p>住所 : {{ seller.address}}</p>
             <a href="{% url 'accounts:edit_profile' %}" class="edit-profile-btn">プロフィールを編集する</a>
         </div>
-        <button class="submit-button">出品する</button>
+        <a href="{% url 'seller:create_item' %}" class="submit-button">出品する</a>
         <div class="product-list">
             <h2>出品している野菜一覧</h2>
             <div class="product">

@@ -19,7 +19,7 @@ def seller_home(request):
 
 
 class CreateItemView(View):
-    template_name = 'create_item.html'
+    template_name = 'seller/create_item.html'
 
     def get(self, request):
         form = ItemForm()

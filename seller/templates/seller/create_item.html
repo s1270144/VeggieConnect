@@ -4,11 +4,52 @@
     <title>Create Item</title>
 </head>
 <body>
-    <h1>Create Item</h1>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Create</button>
-    </form>
+    <div class="h1">Create Item</div>
+    <div class="form-fields">
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Create</button>
+        </form>
+    </div>
+    <!-- 戻るボタン -->
+    <div class="back-container">
+        <a href="javascript:history.go(-1)" class="back-btn">戻る</a>
+    </div>
+    <style>
+        .h1 {
+            text-align: center;
+            font-weight: bold;
+            font-size: 30px;
+        }
+
+        .form-fields {
+            text-align: center;
+        }
+
+        .form-field {
+            margin-bottom: 10px;
+        }
+
+        /* 戻るボタンのスタイル */
+        .back-container {
+            position: absolute;
+            top: 30px;
+            /* 上からの位置 */
+            left: 30px;
+            /* 左からの位置 */
+        }
+
+        .back-btn {
+            background-color: #dc3545;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+    </style>
 </body>
 </html>

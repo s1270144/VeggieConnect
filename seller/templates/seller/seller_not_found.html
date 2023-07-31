@@ -11,8 +11,8 @@
             padding: 50px;
         }
 
-        /* ログアウトボタンのスタイル */
-        .logout-container {
+        /* 戻るボタンのスタイル */
+        .back-container {
             position: absolute;
             top: 30px;
             /* 上からの位置 */
@@ -20,7 +20,7 @@
             /* 左からの位置 */
         }
 
-        .logout-btn {
+        .back-btn {
             background-color: #dc3545;
             color: #fff;
             padding: 10px 20px;
@@ -36,9 +36,9 @@
     <h1>Register as Seller</h1>
     <p>出品者として登録がされていません。出品者モードに切り替えるには出品者として登録してください。</p>
     <a href="{% url 'accounts:edit_profile' %}" class="btn btn-primary">Settings</a>
-    <!-- ログアウトボタン -->
-    <div class="logout-container">
-        <a href="javascript:history.go(-1)" class="logout-btn">戻る</a>
+    <!-- 戻るボタン -->
+    <div class="back-container">
+        <a href="javascript:history.go(-1)" class="back-btn">戻る</a>
     </div>
 </body>
 </html>
