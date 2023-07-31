@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,46 +8,128 @@
         body {
             font-family: Arial, sans-serif;
         }
+
         .header {
             background-color: #f2f2f2;
             padding: 10px;
         }
+
         .personal-info {
             float: right;
+            width: 200px;
+            margin-top: 30px;
         }
+
         .product-list {
-            margin-top: 20px;
+            width: 700px;
         }
+
         .product {
             border: 1px solid #ccc;
             padding: 10px;
             margin-bottom: 10px;
         }
+
+        /* ボタンのスタイル */
+        .edit-profile-btn {
+            display: inline-block;
+            padding: 10px 10px;
+            background-color: #007bff;
+            color: #fff;
+            text-decoration: none;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        /* マウスオーバー時のスタイル */
+        .edit-profile-btn:hover {
+            background-color: #0056b3;
+        }
+
+        /* アクティブ（クリック）時のスタイル */
+        .edit-profile-btn:active {
+            background-color: #003a80;
+        }
+
+        /* ボタンのスタイル */
+        .submit-button {
+            display: inline-block;
+            padding: 10px 50px;
+            background-color: #007bff;
+            /* ボタンの背景色 */
+            color: #fff;
+            /* ボタンの文字色 */
+            text-decoration: none;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 30px;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+            /* ホバーエフェクトの設定 */
+        }
+
+        /* ボタンのホバーエフェクト */
+        .submit-button:hover {
+            background-color: #0056b3;
+            /* ホバー時の背景色 */
+        }
+
+        /* ログアウトボタンのスタイル */
+        .logout-container {
+            position: absolute;
+            top: 30px;
+            /* 上からの位置 */
+            right: 30px;
+            /* 左からの位置 */
+        }
+
+        .logout-btn {
+            background-color: #dc3545;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
     </style>
 </head>
 <body>
-    <div class="header">
-        <h1>野菜オンラインショップ</h1>
+    <div class="wrap">
+        <div class="header">
+            <h1>野菜オンラインショップ</h1>
+        </div>
+        <!-- ログアウトボタン -->
+        <div class="logout-container">
+            <a href="{% url 'accounts:logout' %}" class="logout-btn">ログアウト</a>
+        </div>
         <div class="personal-info">
-            <p>出品者名：山田太郎</p>
-            <p>住所：東京都○○区</p>
-            <button>個人情報の変更</button>
+            {% if user.profile_picture %}
+            <img src="{{ user.profile_picture.url }}" alt="プロフィール画像">
+            {% else %}
+            <img src="{% static 'images/NoFace.jpg' %}" alt="プロフィール画像">
+            {% endif %}
+            <p>出品者名 : {{ user.last_name }} {{ user.first_name }}</p>
+            <p>住所 : {{ seller.address}}</p>
+            <a href="{% url 'accounts:edit_profile' %}" class="edit-profile-btn">プロフィールを編集する</a>
         </div>
-        <button>出品する</button>
-    </div>
-    <div class="product-list">
-        <h2>出品している野菜一覧</h2>
-        <div class="product">
-            <h3>野菜名：トマト</h3>
-            <p>価格：100円</p>
-            <!-- 他の野菜情報 -->
+        <button class="submit-button">出品する</button>
+        <div class="product-list">
+            <h2>出品している野菜一覧</h2>
+            <div class="product">
+                <h3>野菜名：トマト</h3>
+                <p>価格 : 100円</p>
+                <!-- 他の野菜情報 -->
+            </div>
+            <div class="product">
+                <h3>野菜名：キャベツ</h3>
+                <p>価格 : 150円</p>
+                <!-- 他の野菜情報 -->
+            </div>
+            <!-- 他の出品中の野菜 -->
         </div>
-        <div class="product">
-            <h3>野菜名：キャベツ</h3>
-            <p>価格：150円</p>
-            <!-- 他の野菜情報 -->
-        </div>
-        <!-- 他の出品中の野菜 -->
-    </div>
 </body>
 </html>

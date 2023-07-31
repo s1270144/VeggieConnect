@@ -91,6 +91,16 @@ class User(AbstractBaseUser, PermissionsMixin):
         verbose_name=_("updateded_at"),
         auto_now=True
     )
+    address = models.CharField(
+        max_length=200,
+        blank=True,
+        null=True
+    )
+    profile_picture = models.ImageField(
+        upload_to='profile_pics/',
+        blank=True,
+        null=True
+    )
 
     objects = UserManager()
 

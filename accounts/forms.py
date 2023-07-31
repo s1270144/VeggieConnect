@@ -26,3 +26,9 @@ class SignUpForm(UserCreationForm):
 class LoginFrom(AuthenticationForm):
     class Meta:
         model = User
+
+
+class UserProfileForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ('first_name', 'last_name', 'address', 'profile_picture')
