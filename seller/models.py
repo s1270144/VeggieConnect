@@ -12,10 +12,9 @@ class Vegetable(models.Model):
     seller = models.ForeignKey(Seller, on_delete=models.CASCADE)                        # 出品者
     item_name = models.CharField(max_length=100)                                        # 品目名
     item_type = models.CharField(max_length=100)                                        # 品種名
-    stock_quantity = models.PositiveIntegerField()                                      # 在庫数
-    price = models.DecimalField(max_digits=10, decimal_places=2)                        # 単価
+    price = models.DecimalField(max_digits=100, decimal_places=2, default=0)            # 単価
     content_quantity = models.PositiveIntegerField(default=1)                           # まとまりの内容個数
-    content_price = models.DecimalField(max_digits=10, decimal_places=2, default=0)     # まとまりの価格
+    content_price = models.DecimalField(max_digits=100, decimal_places=2, default=0)    # まとまりの価格
     total_quantity = models.PositiveIntegerField(default=0)                             # まとまりの総数
 
     def __str__(self):
