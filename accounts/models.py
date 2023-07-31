@@ -76,7 +76,7 @@ class User(AbstractBaseUser, PermissionsMixin):
         default=False,
     )
     is_seller = models.BooleanField(
-        verbose_name=_('seller status'),
+        verbose_name=_('is_seller'),
         default=False,
     )
     is_active = models.BooleanField(

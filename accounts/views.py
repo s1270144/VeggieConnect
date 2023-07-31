@@ -4,6 +4,8 @@ from django.views.generic import TemplateView, CreateView
 from django.contrib.auth.views import LoginView as BaseLoginView,  LogoutView as BaseLogoutView
 from django.urls import reverse_lazy
 from .forms import SignUpForm, LoginFrom
+from buyer.models import Buyer
+from seller.models import Seller
 
 
 class IndexView(TemplateView):
@@ -15,17 +17,18 @@ class SignupView(CreateView):
     template_name = "accounts/signup.html"
     success_url = reverse_lazy("accounts:index")
 
-    def signup(self, request):
-        if request.method == 'POST':
-            form = SignUpForm(request.POST)
-            if form.is_valid():
-                user = form.save(commit=False)
-                user.is_seller = form.cleaned_data['is_seller']  # フォームの値をis_sellerに代入
-                user.save()
-                return redirect('buyer:home')  # 登録後にリダイレクトするページを指定
-        else:
-            form = SignUpForm()
-        return render(request, 'accounts/login', {'form': form})
+    def form_valid(self, form):
+        response = super().form_valid(form)
+
+        is_seller = form.cleaned_data['is_seller']
+
+        # Buyerモデルのインスタンスを作成して保存する
+        buyer = Buyer.objects.create(user=self.object, address="some_address", favorite="some_favorite")
+        if is_seller:
+            # ユーザーが出品者の場合、Sellerモデルのインスタンスを作成して保存する
+            seller = Seller.objects.create(user=self.object, address="some_address")
+
+        return response
 
 
 class LoginView(BaseLoginView):

@@ -14,7 +14,7 @@
 </head>
 <body>
     <h1>Register as Seller</h1>
-    <p>出品者として登録がされていません。アカウントを作成してください</p>
-    <a href="{% url 'accounts:signup' %}" class="btn btn-primary">Signup</a>
+    <p>出品者として登録がされていません。出品者モードに切り替えるには出品者として登録してください。</p>
+    <a href="{% url 'buyer:home' %}" class="btn btn-primary">Settings</a>
 </body>
 </html>

@@ -9,7 +9,7 @@ class SignUpForm(UserCreationForm):
 
     class Meta:
         model = User
-        fields = ('account_id', 'email', 'first_name', 'last_name', 'birth_date', 'is_seller')
+        fields = ('account_id', 'email', 'last_name', 'first_name', 'birth_date', 'is_seller')
 
         # フィールドのラベルを日本語に設定
         labels = {
