@@ -10,11 +10,35 @@
             text-align: center;
             padding: 50px;
         }
+
+        /* ログアウトボタンのスタイル */
+        .logout-container {
+            position: absolute;
+            top: 30px;
+            /* 上からの位置 */
+            left: 30px;
+            /* 左からの位置 */
+        }
+
+        .logout-btn {
+            background-color: #dc3545;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
     </style>
 </head>
 <body>
     <h1>Register as Seller</h1>
     <p>出品者として登録がされていません。出品者モードに切り替えるには出品者として登録してください。</p>
     <a href="{% url 'accounts:edit_profile' %}" class="btn btn-primary">Settings</a>
+    <!-- ログアウトボタン -->
+    <div class="logout-container">
+        <a href="javascript:history.go(-1)" class="logout-btn">戻る</a>
+    </div>
 </body>
 </html>
