@@ -1,0 +1,29 @@
+.h1 {
+    text-align: center;
+    font-weight: bold;
+    font-size: 30px;
+}
+
+.form-fields {
+    text-align: center;
+}
+
+.form-field {
+    margin-bottom: 10px;
+}
+
+.back-container {
+    position: absolute;
+    top: 30px;
+    left: 30px;
+}
+
+.back-btn {
+    background-color: #dc3545;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    cursor: pointer;
+}

@@ -118,7 +118,9 @@ USE_TZ = True
 STATIC_URL = "accounts:static/"
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'accounts', 'static'),
+    os.path.join(BASE_DIR, 'accounts/static'),
+    os.path.join(BASE_DIR, 'buyer/static'),
+    os.path.join(BASE_DIR, 'seller/static'),
 ]
 
 # Default primary key field type

@@ -1,0 +1,93 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+.header {
+    background-color: #f2f2f2;
+    padding: 10px;
+}
+
+.personal-info {
+    float: right;
+    width: 200px;
+    margin-top: 30px;
+}
+
+.product-list {
+    width: 700px;
+}
+
+.product {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.edit-profile-btn {
+    display: inline-block;
+    padding: 10px 10px;
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.edit-profile-btn:hover {
+    background-color: #0056b3;
+}
+
+.edit-profile-btn:active {
+    background-color: #003a80;
+}
+
+.submit-button {
+    display: inline-block;
+    padding: 10px 50px;
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 30px;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.submit-button:hover {
+    background-color: #0056b3;
+}
+
+.logout-container {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+}
+
+.logout-btn {
+    background-color: #dc3545;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.toggle-mode-container {
+    position: absolute;
+    bottom: 50px;
+    right: 50px;
+}
+
+.toggle-mode-btn {
+    background-color: #28a745;
+    color: #fff;
+    padding: 15px 25px;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    cursor: pointer;
+}
