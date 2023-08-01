@@ -5,6 +5,36 @@
     <title>購入者画面</title>
     <link rel="stylesheet" type="text/css" href="{% static 'buyer/css/home.css' %}">
 </head>
+<style>
+    .productlist-all-btn {
+        background: linear-gradient(to top, rgba(217, 175, 217, 0.7) 0%, rgba(151, 217, 225, 0.7) 100%),
+        url("{% static 'buyer/img/product_all.jpg' %}");
+        background-repeat: no-repeat;
+        background-position: center;
+        color: #ffffff;
+        font-weight: bold;
+        padding: 100px 100px;
+        border: none;
+        border-radius: 5px;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    .productlist-selected-btn {
+        background: linear-gradient(to top, rgba(217, 175, 217, 0.7) 0%, rgba(151, 217, 225, 0.7) 100%),
+        url("{% static 'buyer/img/product_selected.jpg' %}");
+        background-repeat: no-repeat;
+        background-position: center;
+        color: #ffffff;
+        font-weight: bold;
+        padding: 100px 100px;
+        border: none;
+        border-radius: 5px;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+</style>
 <body>
     <div class="wrap">
         <div class="header">

@@ -91,14 +91,3 @@ body {
     gap: 10px;
     justify-content: center;
 }
-
-.productlist-all-btn,
-.productlist-selected-btn {
-    background-color: #28a7a1;
-    color: #fff;
-    padding: 100px 100px;
-    border: none;
-    border-radius: 5px;
-    text-decoration: none;
-    cursor: pointer;
-}
