@@ -109,6 +109,23 @@
             cursor: pointer;
         }
 
+        .button-container {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .productlist-all-btn,
+        .productlist-selected-btn {
+            background-color: #28a7a1;
+            color: #fff;
+            padding: 100px 100px;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
     </style>
 </head>
 <body>
@@ -135,6 +152,10 @@
                 <input type="text" placeholder="検索キーワードを入力してください" size="35">
                 <button type="submit">検索</button>
             </div>
+        </div>
+        <div class="productlist-all-container">
+            <button class="productlist-all-btn">出品商品一覧</button>
+            <button class="productlist-selected-btn">ジャンルで選ぶ</button>
         </div>
         <div class="toggle-mode-container">
             <a href="{% url 'seller:home' %}" class="toggle-mode-btn">出品モード切替</a>
