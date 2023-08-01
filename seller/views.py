@@ -1,21 +1,27 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from .models import Seller
+from .models import Seller, Vegetable
 from accounts.models import UserManager
 from accounts.forms import UserProfileForm
 from django.views import View
 from .forms import ItemForm
 
-@login_required
-def seller_home(request):
-    user = request.user
-    try:
-        seller = Seller.objects.get(user=user)
-        form = UserProfileForm(request.POST, request.FILES)
-        return render(request, 'seller/home.html', {'seller': seller})
-    except Seller.DoesNotExist:
-        # ユーザが出品者でない場合の処理
-        return render(request, 'seller/seller_not_found.html')
+from django.contrib.auth.mixins import LoginRequiredMixin
+
+
+class SellerHomeView(LoginRequiredMixin, View):
+    login_url = '/accounts/login/'  # ログインしていない場合のリダイレクト先URL
+
+    def get(self, request):
+        user = request.user.id
+        try:
+            seller = Seller.objects.get(user_id=user)
+            vegetables = Vegetable.objects.filter(seller_id=seller.id)
+            form = UserProfileForm()
+            return render(request, 'seller/home.html', {'vegetables': vegetables, 'form': form})
+        except Seller.DoesNotExist:
+            # ユーザが出品者でない場合の処理
+            return render(request, 'seller/seller_not_found.html')
 
 
 class CreateItemView(View):

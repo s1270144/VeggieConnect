@@ -117,19 +117,14 @@
             <a href="{% url 'accounts:edit_profile' %}" class="edit-profile-btn">プロフィールを編集する</a>
         </div>
         <a href="{% url 'seller:create_item' %}" class="submit-button">出品する</a>
+        <h2>出品している野菜一覧</h2>
         <div class="product-list">
-            <h2>出品している野菜一覧</h2>
+            {% for vegetable in vegetables %}
             <div class="product">
-                <h3>野菜名：トマト</h3>
-                <p>価格 : 100円</p>
-                <!-- 他の野菜情報 -->
+                <h3>野菜名：{{ vegetable.item_name }}</h3>
+                <p>価格 : {{ vegetable.content_price|floatformat:"0" }}円</p>
             </div>
-            <div class="product">
-                <h3>野菜名：キャベツ</h3>
-                <p>価格 : 150円</p>
-                <!-- 他の野菜情報 -->
-            </div>
-            <!-- 他の出品中の野菜 -->
+            {% endfor %}
         </div>
 </body>
 </html>
