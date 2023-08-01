@@ -123,6 +123,7 @@
             <div class="product">
                 <h3>野菜名：{{ vegetable.item_name }}</h3>
                 <p>価格 : {{ vegetable.content_price|floatformat:"0" }}円</p>
+                <a href="{% url 'seller:product_detail' vegetable_id=vegetable.id %}">詳細を見る</a>
             </div>
             {% endfor %}
         </div>

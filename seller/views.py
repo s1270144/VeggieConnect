@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from .models import Seller, Vegetable
 from accounts.models import UserManager
 from accounts.forms import UserProfileForm
+from django.views.generic import DetailView
 from django.views import View
 from .forms import ItemForm
 
@@ -39,6 +40,13 @@ class CreateItemView(View):
             if request.user.is_authenticated:
                 item.seller = request.user.seller
             item.save()
-            return redirect('seller:home') # リダイレクト先は適宜変更してください
+            return redirect('seller:home')
 
         return render(request, self.template_name, {'form': form})
+
+
+class ProductDetailView(DetailView):
+    model = Vegetable
+    template_name = 'seller/product_detail.html'
+    context_object_name = 'vegetable'
+    pk_url_kwarg = 'vegetable_id'
