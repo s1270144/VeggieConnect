@@ -1,33 +1,23 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import get_user_model
 from django.shortcuts import render, redirect
+from django.views import View
 from .models import Buyer
+from seller.models import Vegetable
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 User = get_user_model()
 
 
-@login_required
-def buyer_home(request):
-    return render(request, 'buyer/home.html')
+class BuyerHomeView(LoginRequiredMixin, View):
+    login_url = '/accounts/login/'  # ログインしていない場合のリダイレクト先URL
 
-def register_user(request):
-    if request.method == 'POST':
-        # ユーザー情報を取得してUserモデルに保存
-        account_id = request.POST['account_id']
-        email = request.POST['email']
-        last_name = request.POST['last_name']
-        birth_date = request.POST['birth_date']
-        password = request.POST['password']
+    def get(self, request):
+        return render(request, 'buyer/home.html')
 
-        user = User.objects.create_user(account_id=account_id, email=email, last_name=last_name, birth_date=birth_date, password=password)
 
-        # Buyerモデルに関連するインスタンスを作成
-        address = request.POST['address']
-        favorite = request.POST['favorite']
-        buyer = Buyer(user=user, address=address, favorite=favorite)
-        buyer.save()
-
-        return redirect('buyer:home')
-    else:
-        return render(request, 'accounts/register.html')
+class VegetableListView(View):
+    def get(self, request):
+        vegetables = Vegetable.objects.all()
+        return render(request, 'buyer/vegetable_list.html', {'vegetables': vegetables})

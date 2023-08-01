@@ -1,0 +1,30 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>出品商品一覧</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'buyer/css/vegetable_list.css' %}">
+</head>
+<body>
+    <div class="header">
+        <h1>Vegetable List</h1>
+    </div>
+    <div class="logout-container">
+        <a href="{% url 'accounts:logout' %}" class="logout-btn">ログアウト</a>
+    </div>
+    <div class="product-list">
+        <ul>
+            {% for vegetable in vegetables %}
+            <li class="product">
+                <h3>{{ vegetable.item_name }}</h3>
+                <p>品種: {{ vegetable.item_type }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;出品者: {{ vegetable.seller.user.last_name }} {{ vegetable.seller.user.first_name }} さん</p>
+                <p>内容量(個数): {{ vegetable.content_quantity }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;価格/袋: {{ vegetable.content_price|floatformat:"0" }}円</p>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="back-container">
+        <a href="javascript:history.go(-1)" class="back-btn">戻る</a>
+    </div>
+</body>
+</html>
