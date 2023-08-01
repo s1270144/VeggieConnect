@@ -1,20 +1,66 @@
+{% load static %}
 <!DOCTYPE html>
-<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Dashboard</title>
+    <title>購入者画面</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            text-align: center;
-            padding: 20px;
         }
 
-        .user-info {
-            background-color: #f0f0f0;
-            padding: 20px;
-            margin-bottom: 20px;
+        .header {
+            background-color: #f2f2f2;
+            padding: 10px;
+        }
+
+        .personal-info {
+            float: right;
+            width: 200px;
+            margin-top: 30px;
+        }
+
+        .edit-profile-btn {
+            display: inline-block;
+            padding: 10px 10px;
+            background-color: #007bff;
+            color: #fff;
+            text-decoration: none;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        .edit-profile-btn:hover {
+            background-color: #0056b3;
+        }
+
+        .edit-profile-btn:active {
+            background-color: #003a80;
+        }
+
+        .personal-info {
+            float: right;
+            width: 200px;
+            margin-top: 30px;
+        }
+
+        .edit-profile-btn {
+            display: inline-block;
+            padding: 10px 10px;
+            background-color: #007bff;
+            color: #fff;
+            text-decoration: none;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        .centered-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 50vh;
         }
 
         .purchase-list-btn {
@@ -28,26 +74,13 @@
         }
 
         .search-box {
-            margin: 20px 0;
+            margin: 30px 0;
         }
 
-        .toggle-mode-btn {
-            background-color: #28a745;
-            color: #fff;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            text-decoration: none;
-            cursor: pointer;
-        }
-
-        /* ログアウトボタンのスタイル */
         .logout-container {
             position: absolute;
             top: 30px;
-            /* 上からの位置 */
             right: 30px;
-            /* 左からの位置 */
         }
 
         .logout-btn {
@@ -60,33 +93,51 @@
             cursor: pointer;
         }
 
+        .toggle-mode-container {
+            position: absolute;
+            bottom: 50px;
+            right: 50px;
+        }
+
+        .toggle-mode-btn {
+            background-color: #28a745;
+            color: #fff;
+            padding: 15px 25px;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
     </style>
 </head>
 <body>
-    <div class="user-info">
-        <h1>User Information</h1>
-        <p>ユーザ名 : {{ user.last_name }} {{ user.first_name }}</p>
-        <p>Email : {{ user.email }}</p>
-        <!-- <p>会員ステータス：Gold</p> # 未完成 -->
-    </div>
-
-    <!-- ログアウトボタン -->
-    <div class="logout-container">
-        <a href="{% url 'accounts:logout' %}" class="logout-btn">ログアウト</a>
-    </div>
-
-    <div>
-        <a href="#" class="purchase-list-btn">購入一覧表示</a>
-    </div>
-
-    <div class="search-box">
-        <!-- 検索ボックスのコードを追加 -->
-        <input type="text" placeholder="検索キーワードを入力してください">
-        <button type="submit">検索</button>
-    </div>
-
-    <div>
-        <a href="{% url 'seller:home' %}" class="toggle-mode-btn">出品モード切替</a>
-    </div>
+    <div class="wrap">
+        <div class="header">
+            <h1>野菜オンラインショップ（購入）</h1>
+        </div>
+        <div class="logout-container">
+            <a href="{% url 'accounts:logout' %}" class="logout-btn">ログアウト</a>
+        </div>
+        <div class="personal-info">
+            {% if user.profile_picture %}
+            <img src="{{ user.profile_picture.url }}" alt="プロフィール画像">
+            {% else %}
+            <img src="{% static 'images/NoFace.jpg' %}" alt="プロフィール画像">
+            {% endif %}
+            <p>出品者名 : {{ user.last_name }} {{ user.first_name }}</p>
+            <p>住所 : {{ seller.address}}</p>
+            <a href="{% url 'accounts:edit_profile' %}" class="edit-profile-btn">プロフィールを編集する</a>
+        </div>
+        <div class="centered-content">
+            <a href="#" class="purchase-list-btn">購入一覧表示</a>
+            <div class="search-box">
+                <input type="text" placeholder="検索キーワードを入力してください" size="35">
+                <button type="submit">検索</button>
+            </div>
+        </div>
+        <div class="toggle-mode-container">
+            <a href="{% url 'seller:home' %}" class="toggle-mode-btn">出品モード切替</a>
+        </div>
 </body>
 </html>

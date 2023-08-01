@@ -30,7 +30,6 @@
             margin-bottom: 10px;
         }
 
-        /* ボタンのスタイル */
         .edit-profile-btn {
             display: inline-block;
             padding: 10px 10px;
@@ -42,24 +41,19 @@
             cursor: pointer;
         }
 
-        /* マウスオーバー時のスタイル */
         .edit-profile-btn:hover {
             background-color: #0056b3;
         }
 
-        /* アクティブ（クリック）時のスタイル */
         .edit-profile-btn:active {
             background-color: #003a80;
         }
 
-        /* ボタンのスタイル */
         .submit-button {
             display: inline-block;
             padding: 10px 50px;
             background-color: #007bff;
-            /* ボタンの背景色 */
             color: #fff;
-            /* ボタンの文字色 */
             text-decoration: none;
             border: none;
             border-radius: 5px;
@@ -67,22 +61,16 @@
             margin: 30px;
             font-size: 16px;
             transition: background-color 0.3s ease;
-            /* ホバーエフェクトの設定 */
         }
 
-        /* ボタンのホバーエフェクト */
         .submit-button:hover {
             background-color: #0056b3;
-            /* ホバー時の背景色 */
         }
 
-        /* ログアウトボタンのスタイル */
         .logout-container {
             position: absolute;
             top: 30px;
-            /* 上からの位置 */
             right: 30px;
-            /* 左からの位置 */
         }
 
         .logout-btn {
@@ -95,14 +83,29 @@
             cursor: pointer;
         }
 
+        .toggle-mode-container {
+            position: absolute;
+            bottom: 50px;
+            right: 50px;
+        }
+
+        .toggle-mode-btn {
+            background-color: #28a745;
+            color: #fff;
+            padding: 15px 25px;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
     </style>
 </head>
 <body>
     <div class="wrap">
         <div class="header">
-            <h1>野菜オンラインショップ</h1>
+            <h1>野菜オンラインショップ（出品）</h1>
         </div>
-        <!-- ログアウトボタン -->
         <div class="logout-container">
             <a href="{% url 'accounts:logout' %}" class="logout-btn">ログアウト</a>
         </div>
@@ -126,6 +129,9 @@
                 <a href="{% url 'seller:product_detail' vegetable_id=vegetable.id %}">詳細を見る</a>
             </div>
             {% endfor %}
+        </div>
+        <div class="toggle-mode-container">
+            <a href="{% url 'buyer:home' %}" class="toggle-mode-btn">購入モード切替</a>
         </div>
 </body>
 </html>
