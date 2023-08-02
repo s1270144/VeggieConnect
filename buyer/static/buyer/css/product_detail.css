@@ -90,6 +90,14 @@ body {
     cursor: pointer;
 }
 
+.form-fields {
+    text-align: center;
+}
+
+.form-field {
+    margin-bottom: 10px;
+}
+
 h1 {
     text-align: center;
     padding: 20px 0;
@@ -130,6 +138,7 @@ h1 {
 .comment {
     background-color: #f2f2f2;
     padding: 10px;
+    left: 30px;
     border-radius: 5px;
     margin-bottom: 10px;
     display: flex;
