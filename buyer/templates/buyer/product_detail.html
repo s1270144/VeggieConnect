@@ -33,9 +33,6 @@
         <p>まとまりの価格：{{ vegetable.content_price|floatformat:"0" }}円</p>
         <p>まとまりの総数：{{ vegetable.total_quantity }}</p>
     </div>
-    <div class="back-container">
-        <a href="javascript:history.go(-1)" class="back-btn">戻る</a>
-    </div>
     <div class="comment-section">
         <h2>コメント</h2>
         {% for comment in vegetable.comments %}
@@ -43,6 +40,9 @@
             <p>{{ comment.text }}</p>
         </div>
         {% endfor %}
+    </div>
+    <div class="back-container">
+        <a href="#" onclick="window.history.back();" class="back-btn">戻る</a>
     </div>
 </body>
 </html>

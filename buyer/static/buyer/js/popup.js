@@ -9,3 +9,7 @@ function closePopup() {
     var popupContent = document.getElementById('popup-content');
     popupContent.style.display = 'none';
 }
+
+function goBack() {
+    window.history.back(); // ブラウザの履歴を操作して前のページに戻る
+}
