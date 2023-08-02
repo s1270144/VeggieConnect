@@ -19,7 +19,7 @@
                 <h3>{{ vegetable.item_name }}</h3>
                 <p>品種: {{ vegetable.item_type }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;出品者: {{ vegetable.seller.user.last_name }} {{ vegetable.seller.user.first_name }} さん</p>
                 <p>内容量(個数): {{ vegetable.content_quantity }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;価格/袋: {{ vegetable.content_price|floatformat:"0" }}円
-                <a href="{% url 'seller:product_detail' vegetable_id=vegetable.id %}" >詳細</a></p>
+                <a href="{% url 'buyer:product_detail' vegetable_id=vegetable.id %}" >詳細</a></p>
             </li>
             {% endfor %}
         </ul>

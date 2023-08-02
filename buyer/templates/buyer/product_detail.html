@@ -3,8 +3,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>野菜詳細</title>
-    <link rel="stylesheet" type="text/css" href="{% static 'seller/css/product_detail.css' %}">
+    <title>商品詳細</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'buyer/css/product_detail.css' %}">
+    <script src="{% static 'buyer/js/popup.js' %}"></script>
 </head>
 <body>
     <h1>野菜詳細</h1>
@@ -16,6 +17,13 @@
         {% endif %}
         <p>出品者名 : {{ user.last_name }} {{ user.first_name }}</p>
         <p>住所 : {{ seller.address}}</p>
+        <button class="purchase-btn" onclick="openPopup()">購入</buttton>
+    </div>
+    <div id="popup-content" class="popup-content" style="display: none;">
+        <button class="close-btn" onclick="closePopup()">X</button>
+        <p class="popup-text">確認</p>
+        <button class="popup-button" onclick="closePopup()">キャンセル</button>
+        <button class="popup-button">購入</button>
     </div>
     <div class="product-detail">
         <h3>商品名：{{ vegetable.item_name }}</h3>
@@ -24,7 +32,6 @@
         <p>まとまりの内容個数：{{ vegetable.content_quantity }}</p>
         <p>まとまりの価格：{{ vegetable.content_price|floatformat:"0" }}円</p>
         <p>まとまりの総数：{{ vegetable.total_quantity }}</p>
-        <a href='#' class="edit-btn">編集</a>
     </div>
     <div class="back-container">
         <a href="javascript:history.go(-1)" class="back-btn">戻る</a>
@@ -34,7 +41,6 @@
         {% for comment in vegetable.comments %}
         <div class="comment">
             <p>{{ comment.text }}</p>
-            <button class="comment-edit-btn">編集</button>
         </div>
         {% endfor %}
     </div>
