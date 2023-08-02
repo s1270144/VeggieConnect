@@ -1,0 +1,117 @@
+/* product_detail.css */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+    margin: 0;
+    padding: 0;
+}
+
+.personal-info {
+    float: right;
+    width: 200px;
+    margin-top: 30px;
+}
+
+.edit-profile-btn {
+    display: inline-block;
+    padding: 10px 10px;
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.edit-profile-btn:hover {
+    background-color: #0056b3;
+}
+
+.edit-profile-btn:active {
+    background-color: #003a80;
+}
+
+h1 {
+    text-align: center;
+    padding: 20px 0;
+}
+
+.product-detail {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.product-detail h3 {
+    font-size: 24px;
+    color: #007bff;
+}
+
+.product-detail p {
+    font-size: 16px;
+    color: #333;
+    margin: 5px 0;
+}
+
+.edit-btn {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    float: right;
+}
+
+.comment-section {
+    margin-top: 30px;
+}
+
+.comment-section h2 {
+    font-size: 20px;
+    color: #007bff;
+    margin-bottom: 10px;
+}
+
+.comment {
+    background-color: #f2f2f2;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.comment p {
+    margin: 0;
+}
+
+.comment-edit-btn {
+    background-color: #28a745;
+    color: #fff;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.back-container {
+    position: absolute;
+    top: 30px;
+    left: 30px;
+}
+
+.back-btn {
+    background-color: #dc3545;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    cursor: pointer;
+}

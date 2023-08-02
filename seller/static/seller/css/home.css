@@ -10,7 +10,15 @@ body {
 .personal-info {
     float: right;
     width: 200px;
-    margin-top: 30px;
+    margin-top: 5px;
+}
+
+.edit-profile-btn:hover {
+    background-color: #0056b3;
+}
+
+.edit-profile-btn:active {
+    background-color: #003a80;
 }
 
 .product-list {
@@ -21,25 +29,6 @@ body {
     border: 1px solid #ccc;
     padding: 10px;
     margin-bottom: 10px;
-}
-
-.edit-profile-btn {
-    display: inline-block;
-    padding: 10px 10px;
-    background-color: #007bff;
-    color: #fff;
-    text-decoration: none;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-}
-
-.edit-profile-btn:hover {
-    background-color: #0056b3;
-}
-
-.edit-profile-btn:active {
-    background-color: #003a80;
 }
 
 .submit-button {
