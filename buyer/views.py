@@ -37,14 +37,14 @@ class ProductDetailView(DetailView):
         vegetable = get_object_or_404(Vegetable, pk=vegetable_id)
 
         form = PurchaseForm(request.POST, initial={'max_quantity': vegetable.total_quantity})
-        print(form)
         if form.is_valid():
             quantity = form.cleaned_data['quantity']
-
+            print(quantity)
             # 在庫数と購入数を比較して、在庫を超えないようにする
             if quantity <= vegetable.total_quantity:
                 # 在庫数を更新
                 vegetable.total_quantity -= quantity
+                print(vegetable.total_quantity)
                 vegetable.save()
                 return redirect('buyer:purchase_complete')
 

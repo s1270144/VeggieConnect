@@ -10,6 +10,8 @@
 ## 環境
 
 - Platform: Kaleido
+  - Provider: Quorum: プライベートなブロックチェーン
+  - Consensus Algorithm: Raft = ブロックの生成タイミングがトランザクション毎
 - Language: Solidity
 
 ## 記録項目
