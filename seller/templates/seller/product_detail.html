@@ -23,7 +23,7 @@
         <p>まとまりの内容個数：{{ vegetable.content_quantity }}</p>
         <p>まとまりの価格：{{ vegetable.content_price|floatformat:"0" }}円</p>
         <p>まとまりの総数：{{ vegetable.total_quantity }}</p>
-        <a href='#' class="edit-btn">編集</a>
+        <a href="{% url 'seller:edit_item' vegetable_id=vegetable.id %}" class="edit-btn">編集</a>
     </div>
     <div class="back-container">
         <a href="javascript:history.go(-1)" class="back-btn">戻る</a>

@@ -1,7 +1,6 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .models import Seller, Vegetable
-from accounts.models import UserManager
 from accounts.forms import UserProfileForm
 from django.views.generic import DetailView
 from django.views import View
@@ -49,3 +48,25 @@ class ProductDetailView(DetailView):
     template_name = 'seller/product_detail.html'
     context_object_name = 'vegetable'
     pk_url_kwarg = 'vegetable_id'
+
+
+class EditItemView(View):
+    model = Vegetable
+    template_name = 'seller/edit_item.html'
+
+    def get(self, request, vegetable_id):
+        vegetable = get_object_or_404(self.model, pk=vegetable_id)
+        # print(vegetable)               # seller_id
+        # print(vegetable.item_name)     # 商品名
+        form = ItemForm()
+        return render(request, self.template_name, {'vegetable': vegetable, 'form': form})
+
+    def post(self, request, vegetable_id):
+        print('test_post')
+        vegetable = get_object_or_404(self.model, pk=vegetable_id)
+        form = ItemForm(request.POST, instance=vegetable)
+        if form.is_valid():
+            form.save()
+            return redirect('seller:home')
+
+        return render(request, self.template_name, {'vegetable': vegetable, 'form': form})

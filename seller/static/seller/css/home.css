@@ -67,7 +67,7 @@ body {
 
 .toggle-mode-container {
     position: fixed;
-    overflow-y: auto; 
+    overflow-y: auto;
     bottom: 50px;
     right: 50px;
 }
@@ -75,7 +75,7 @@ body {
 .toggle-mode-btn {
     background-color: #28a745;
     color: #fff;
-    padding: 15px 25px;
+    padding: 20px 25px;
     border: none;
     border-radius: 5px;
     text-decoration: none;
