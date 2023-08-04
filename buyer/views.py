@@ -30,7 +30,9 @@ class ProductDetailView(DetailView):
 
     def get(self, request, vegetable_id):
         vegetable = get_object_or_404(Vegetable, pk=vegetable_id)
+        # print(vegetable.item_name)
         form = PurchaseForm(initial={'max_quantity': vegetable.total_quantity})
+        form.fields['quantity'].widget.attrs['max'] = vegetable.total_quantity
         return render(request, self.template_name, {'vegetable': vegetable, 'form': form})
 
     def post(self, request, vegetable_id):

@@ -17,21 +17,37 @@
         {% endif %}
         <p>出品者名 : {{ user.last_name }} {{ user.first_name }}</p>
         <p>住所 : {{ seller.address}}</p>
-        <button class="purchase-btn" onclick="openPopup()">購入</buttton>
+        <button type="button" class="purchase-btn" onclick="openPopup()">購入</buttton>
     </div>
-    <div id="popup-content" class="popup-content" style="display: none;">
+    <div id="popup" class="popup-content" style="display: none;">
         <button class="close-btn" onclick="closePopup()">X</button>
         <p class="popup-text">確認</p>
         <div class="form-fields">
-            <form method="post">
+            <form method="post" , id="purchaseForm">
                 {% csrf_token %}
                 {{ form.as_p }}
-                <p>合計金額: {{ form.calculate_total_price }}</p>
-                <button class="popup-button" onclick="closePopup()">キャンセル</button>
+                <button type="button" id="calculateButton">金額計算</button>
+                <p id="totalPrice"></p>
                 <input type="submit" value="購入" class="popup-button">
             </form>
         </div>
     </div>
+    <script>
+        function openPopup() {
+            document.getElementById("popup").style.display = "block";
+        }
+
+        function closePopup() {
+            document.getElementById("popup").style.display = "none";
+        }
+        document.getElementById("calculateButton").addEventListener("click", function () {
+            const form = document.getElementById("purchaseForm");
+            const quantity = parseInt(form.quantity.value);
+            const contentPrice = parseFloat("{{ vegetable.content_price }}");
+            const totalPrice = quantity * contentPrice;
+            document.getElementById("totalPrice").innerText = "合計金額：" + totalPrice + "円";
+        });
+    </script>
     <div class="product-detail">
         <h3>商品名：{{ vegetable.item_name }}</h3>
         <p>品種名：{{ vegetable.item_type }}</p>

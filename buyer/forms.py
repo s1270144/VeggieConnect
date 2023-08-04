@@ -6,8 +6,13 @@ class PurchaseForm(forms.Form):
 
     def __init__(self, *args, **kwargs):
         max_quantity = kwargs.pop('max_quantity', None)
-        super(PurchaseForm, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         if max_quantity is not None:
-            self.fields['quantity'].validators.append(
-                MaxValueValidator(max_value=max_quantity, message=f"在庫数は{max_quantity}以下にしてください。")
-            )
+            self.fields['quantity'].widget.attrs['max'] = max_quantity
+
+    def clean_quantity(self):
+        quantity = self.cleaned_data['quantity']
+        max_quantity = self.fields['quantity'].widget.attrs.get('max')
+        if max_quantity is not None and quantity > max_quantity:
+            raise forms.ValidationError('在庫数を超える数量は選択できません。')
+        return quantity
