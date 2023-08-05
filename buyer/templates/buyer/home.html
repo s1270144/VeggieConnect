@@ -54,7 +54,7 @@
             <a href="{% url 'accounts:edit_profile' %}" class="edit-profile-btn">プロフィールを編集する</a>
         </div>
         <div class="centered-content">
-            <a href="#" class="purchase-list-btn">購入一覧表示</a>
+            <a href="{% url 'buyer:transaction_list' %}" class="purchase-list-btn">購入一覧表示</a>
             <div class="search-box">
                 <input type="text" placeholder="検索キーワードを入力してください" size="35">
                 <button type="submit">検索</button>

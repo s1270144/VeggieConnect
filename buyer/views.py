@@ -2,11 +2,16 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import get_user_model
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
-from .models import Buyer
+from .models import Buyer, Transaction
 from seller.models import Vegetable
 from django.views.generic import DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import PurchaseForm
+import uuid
+from .blockchain.func.get_numTransaction import get_numtx
+from .blockchain.func.get_detail import get_detail
+from .blockchain.func.get_transactionInfo import get_tx
+from .blockchain.func.set_transaction import set_info
 
 
 User = get_user_model()
@@ -18,13 +23,16 @@ class BuyerHomeView(LoginRequiredMixin, View):
         return render(request, 'buyer/home.html')
 
 
-class VegetableListView(View):
+class VegetableListView(LoginRequiredMixin, View):
+    login_url = '/accounts/login/'
+    template_name = 'buyer/vegetable_list.html'
     def get(self, request):
         vegetables = Vegetable.objects.all()
-        return render(request, 'buyer/vegetable_list.html', {'vegetables': vegetables})
+        return render(request, self.template_name, {'vegetables': vegetables})
 
 
-class ProductDetailView(DetailView):
+class ProductDetailView(LoginRequiredMixin, DetailView):
+    login_url = '/accounts/login/'
     model = Vegetable
     template_name = 'buyer/product_detail.html'
 
@@ -40,19 +48,48 @@ class ProductDetailView(DetailView):
 
         form = PurchaseForm(request.POST, initial={'max_quantity': vegetable.total_quantity})
         if form.is_valid():
+            purchase_id = str(uuid.uuid4())
+            user = request.user.id
+            item_id = vegetable_id
             quantity = form.cleaned_data['quantity']
-            print(quantity)
+            purchase_price = int(vegetable.content_price * quantity)
+            purchase_status = '---'
+            payment_method = '---'
+            shipping_info = '---'
+            billing_info = '---'
+            additional_info = '---'
+            transaction = Transaction.objects.create(
+                purchase_id=purchase_id,
+                purchase_status=purchase_status,
+                payment_method=payment_method,
+                shipping_info=shipping_info,
+                billing_info=billing_info,
+                additional_info=additional_info
+            )
+            transaction.save()
+            set_info(purchase_id, str(user), str(item_id), str(purchase_price), str(quantity))
             # 在庫数と購入数を比較して、在庫を超えないようにする
             if quantity <= vegetable.total_quantity:
                 # 在庫数を更新
                 vegetable.total_quantity -= quantity
-                print(vegetable.total_quantity)
                 vegetable.save()
                 return redirect('buyer:purchase_complete')
 
         return render(request, self.template_name, {'vegetable': vegetable, 'form': form})
 
 
-class PurchaseCompleteView(View):
+class PurchaseCompleteView(LoginRequiredMixin, View):
+    login_url = '/accounts/login/'
+    template_name = 'buyer/purchase_complete.html'
     def get(self, request):
-        return render(request, 'buyer/purchase_complete.html')
+        return render(request, self.template_name)
+
+
+class TransactionListView(LoginRequiredMixin, View):
+    login_url = '/accounts/login/'
+    template_name = 'buyer/transaction_list.html'
+    def get(self, request):
+        user = request.user.id
+        get_tx(str(user))
+        # transactions = Transaction.objects.get(user_id=user)
+        return render(request, self.template_name)

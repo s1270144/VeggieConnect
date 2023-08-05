@@ -7,7 +7,7 @@ load_dotenv()
 
 URL = os.environ['GATEWAY_URL']
 PATH = os.environ['GATEWAY_PATH']
-FUNC = os.environ['FUNC_GETTXINFO']
+FUNC = os.environ['FUNC_GETDETAIL']
 AUTHORIZATION = os.environ['AUTHORIZATION']
 KLD_FORM = os.environ['KLD_FORM']
 
@@ -18,7 +18,7 @@ headers = {
     'Authorization': AUTHORIZATION,
 }
 
-def get_tx(purchase_id):
+def get_detail(purchase_id):
     params = {
         'purchase_id': purchase_id,
         'kld-from': KLD_FORM,

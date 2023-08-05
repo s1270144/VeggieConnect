@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.18;
 
-contract PurchaseTransaction {
+contract PurchaseTx {
 	// ①コントラクトオーナーのアドレス
     address private owner;
     uint private numTransaction;  // 購入取引数
@@ -49,11 +49,22 @@ contract PurchaseTransaction {
     //     return (transaction[_numTransaction].purchase_id, transaction[_numTransaction].user_id, transaction[_numTransaction].item_id, transaction[_numTransaction].purchase_date, transaction[_numTransaction].purchase_price, transaction[_numTransaction].quantity);
     // }
 
-    // ④引数のpurchase_idにマッチするtransactionInfo構造体を取得する関数
-    function getTransactionInfo(string memory purchase_id) public view returns (transactionInfo memory) {
+    // 引数のpurchase_idにマッチするtransactionInfo構造体を取得する関数
+    function get_detail(string memory purchase_id) public view returns (transactionInfo memory) {
         for (uint i = 0; i < numTransaction; i++) {
             transactionInfo memory info = transaction[i];
             if (compareStrings(info.purchase_id, purchase_id)) {
+                return info;
+            }
+        }
+        revert("Transaction not found");
+    }
+
+    // 引数のuser_idにマッチするtransactionInfo構造体を取得する関数
+    function getTransactionInfo(string memory user_id) public view returns (transactionInfo memory) {
+        for (uint i = 0; i < numTransaction; i++) {
+            transactionInfo memory info = transaction[i];
+            if (compareStrings(info.user_id, user_id)) {
                 return info;
             }
         }
@@ -71,4 +82,3 @@ contract PurchaseTransaction {
     }
 
 }
-

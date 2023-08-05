@@ -1,0 +1,29 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>購入商品一覧</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'buyer/css/transaction_list.css' %}">
+</head>
+<body>
+    <div class="header">
+        <h1>購入商品一覧</h1>
+    </div>
+    <div class="logout-container">
+        <a href="{% url 'accounts:logout' %}" class="logout-btn">ログアウト</a>
+    </div>
+    <div class="product-list">
+        <ul>
+            {% for transaction in transactions %}
+            <li class="product">
+                <h3>{{ transaction.purchase_id }}</h3>
+                <a href="{% url 'buyer:product_detail' transaction_id=transaction.id %}" >詳細</a></p>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="back-container">
+        <a href="javascript:history.go(-1)" class="back-btn">戻る</a>
+    </div>
+</body>
+</html>
