@@ -12,6 +12,7 @@ from .blockchain.func.get_numTransaction import get_numtx
 from .blockchain.func.get_detail import get_detail
 from .blockchain.func.get_transactionInfo import get_tx
 from .blockchain.func.set_transaction import set_info
+import datetime
 
 
 User = get_user_model()
@@ -28,6 +29,7 @@ class VegetableListView(LoginRequiredMixin, View):
     template_name = 'buyer/vegetable_list.html'
     def get(self, request):
         vegetables = Vegetable.objects.all()
+        print(vegetables)
         return render(request, self.template_name, {'vegetables': vegetables})
 
 
@@ -88,8 +90,26 @@ class PurchaseCompleteView(LoginRequiredMixin, View):
 class TransactionListView(LoginRequiredMixin, View):
     login_url = '/accounts/login/'
     template_name = 'buyer/transaction_list.html'
+
     def get(self, request):
         user = request.user.id
-        get_tx(str(user))
-        # transactions = Transaction.objects.get(user_id=user)
-        return render(request, self.template_name)
+        tx_list = get_tx(str(user))
+        l = []
+        for vege in tx_list['output']:
+            l.append(vege['item_id'])
+        vegetables = Vegetable.objects.filter(id__in=l)
+        vegetable_and_transaction = zip(vegetables, tx_list['output'])
+        return render(request, self.template_name, {'vegetable_and_transaction': vegetable_and_transaction})
+
+
+class TransactionDetailView(LoginRequiredMixin, View):
+    login_url = '/accounts/login/'
+    template_name = 'buyer/transaction_detail.html'
+
+    def get(self, request, vegetable_id, transaction_id):
+        vegetable = get_object_or_404(Vegetable, pk=vegetable_id)
+        tx_detail = get_detail(transaction_id)
+        timestamp = int(tx_detail['output']['purchase_date'][:10])
+        dt = datetime.datetime.fromtimestamp(timestamp)
+        tx_detail['output']['purchase_date'] = str(dt)
+        return render(request, self.template_name, {'vegetable': vegetable, 'tx_detail': tx_detail['output']})

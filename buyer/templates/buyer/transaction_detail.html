@@ -1,0 +1,28 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>購入した商品の情報</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'buyer/css/transaction_detail.css' %}">
+</head>
+<body>
+    <div class="header">
+        <h1>購入した商品の情報</h1>
+    </div>
+    <div class="product-list">
+        <ul>
+            <li class="product">
+                <h3>{{ vegetable.item_name }}</h3>
+                <p>出品者: {{ vegetable.seller.user.last_name }} {{ vegetable.seller.user.first_name }} さん</p>
+                <p>購入日時: {{ tx_detail.purchase_date }}</p>
+                <p>購入個数(セット): {{ tx_detail.quantity }}</p>
+                <p>金額: {{ tx_detail.purchase_price }}円</p>
+                <a href="#" class="cancel-btn">キャンセル</a>
+            </li>
+        </ul>
+    </div>
+    <div class="back-container">
+        <a href="javascript:history.go(-1)" class="back-btn">戻る</a>
+    </div>
+</body>
+</html>

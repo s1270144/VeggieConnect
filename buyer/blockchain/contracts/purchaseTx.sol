@@ -61,15 +61,34 @@ contract PurchaseTx {
     }
 
     // 引数のuser_idにマッチするtransactionInfo構造体を取得する関数
-    function getTransactionInfo(string memory user_id) public view returns (transactionInfo memory) {
+    function getTransactionInfo(string memory user_id) public view returns (transactionInfo[] memory) {
+        uint count = 0;
         for (uint i = 0; i < numTransaction; i++) {
-            transactionInfo memory info = transaction[i];
-            if (compareStrings(info.user_id, user_id)) {
-                return info;
+            if (compareStrings(transaction[i].user_id, user_id)) {
+                count++;
             }
         }
-        revert("Transaction not found");
+
+        // マッチするtransactionInfoを保存する配列を初期化
+        transactionInfo[] memory matches = new transactionInfo[](count);
+        uint index = 0;
+
+        // マッチするtransactionInfoを配列に追加
+        for (uint i = 0; i < numTransaction; i++) {
+            if (compareStrings(transaction[i].user_id, user_id)) {
+                matches[index] = transaction[i];
+                index++;
+            }
+        }
+
+        // 一致するtransactionInfoが存在しない場合はエラーを発生させる
+        if (count == 0) {
+            revert("Transaction not found");
+        }
+
+        return matches;
     }
+
 
     // 文字列を比較するためのヘルパー関数（Solidityのバージョンによって異なる）
     function compareStrings(string memory a, string memory b) private pure returns (bool) {

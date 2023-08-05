@@ -3,7 +3,7 @@
 <html>
 <head>
     <title>購入商品一覧</title>
-    <link rel="stylesheet" type="text/css" href="{% static 'buyer/css/transaction_list.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'buyer/css/vegetable_list.css' %}">
 </head>
 <body>
     <div class="header">
@@ -14,10 +14,10 @@
     </div>
     <div class="product-list">
         <ul>
-            {% for transaction in transactions %}
+            {% for vegetable, element in vegetable_and_transaction %}
             <li class="product">
-                <h3>{{ transaction.purchase_id }}</h3>
-                <a href="{% url 'buyer:product_detail' transaction_id=transaction.id %}" >詳細</a></p>
+                <h3>{{ vegetable.item_name }}</h3>
+                <a href="{% url 'buyer:transaction_detail' vegetable_id=vegetable.id transaction_id=element.purchase_id %}" >詳細</a></p>
             </li>
             {% endfor %}
         </ul>

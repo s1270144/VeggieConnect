@@ -32,4 +32,5 @@ def get_detail(purchase_id):
 
     ret = response.status_code
     dic = json.loads(response.text)
-    print(dic)
+
+    return dic
