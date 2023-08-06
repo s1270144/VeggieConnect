@@ -40,7 +40,6 @@ class ProductDetailView(LoginRequiredMixin, DetailView):
 
     def get(self, request, vegetable_id):
         vegetable = get_object_or_404(Vegetable, pk=vegetable_id)
-        # print(vegetable.item_name)
         form = PurchaseForm(initial={'max_quantity': vegetable.total_quantity})
         form.fields['quantity'].widget.attrs['max'] = vegetable.total_quantity
         return render(request, self.template_name, {'vegetable': vegetable, 'form': form})
@@ -95,11 +94,17 @@ class TransactionListView(LoginRequiredMixin, View):
         user = request.user.id
         tx_list = get_tx(str(user))
         l = []
-        for vege in tx_list['output']:
-            l.append(vege['item_id'])
-        vegetables = Vegetable.objects.filter(id__in=l)
-        vegetable_and_transaction = zip(vegetables, tx_list['output'])
-        return render(request, self.template_name, {'vegetable_and_transaction': vegetable_and_transaction})
+        try:
+            print(tx_list['output'])
+            for vege in tx_list['output']:
+                l.append(vege['item_id'])
+            print(l)
+            vegetables = Vegetable.objects.filter(id__in=l)
+            vegetable_and_transaction = zip(vegetables, tx_list['output'])
+            return render(request, self.template_name, {'vegetable_and_transaction': vegetable_and_transaction})
+        except:
+            return render(request, 'buyer/home.html')
+
 
 
 class TransactionDetailView(LoginRequiredMixin, View):
