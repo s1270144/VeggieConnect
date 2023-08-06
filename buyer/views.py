@@ -3,7 +3,7 @@ from django.contrib.auth import get_user_model
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
 from .models import Buyer, Transaction
-from seller.models import Vegetable
+from seller.models import Vegetable, Product
 from django.views.generic import DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import PurchaseForm
@@ -13,6 +13,7 @@ from .blockchain.func.get_detail import get_detail
 from .blockchain.func.get_transactionInfo import get_tx
 from .blockchain.func.set_transaction import set_info
 import datetime
+from django.db.models import Q
 
 
 User = get_user_model()
@@ -20,8 +21,9 @@ User = get_user_model()
 
 class BuyerHomeView(LoginRequiredMixin, View):
     login_url = '/accounts/login/'  # ログインしていない場合のリダイレクト先URL
+    template_name = 'buyer/home.html'
     def get(self, request):
-        return render(request, 'buyer/home.html')
+        return render(request, self.template_name)
 
 
 class VegetableListView(LoginRequiredMixin, View):
@@ -29,7 +31,7 @@ class VegetableListView(LoginRequiredMixin, View):
     template_name = 'buyer/vegetable_list.html'
     def get(self, request):
         vegetables = Vegetable.objects.all()
-        print(vegetables)
+        # print(vegetables)
         return render(request, self.template_name, {'vegetables': vegetables})
 
 
@@ -118,3 +120,32 @@ class TransactionDetailView(LoginRequiredMixin, View):
         dt = datetime.datetime.fromtimestamp(timestamp)
         tx_detail['output']['purchase_date'] = str(dt)
         return render(request, self.template_name, {'vegetable': vegetable, 'tx_detail': tx_detail['output']})
+
+
+class GenreFirstView(LoginRequiredMixin, View):
+    login_url = '/accounts/login/'
+    template_name = 'buyer/genre.html'
+    def get(self, request):
+        products = Product.objects.all()
+        return render(request, self.template_name, {'products': products})
+
+
+class GenreVegetableView(LoginRequiredMixin, View):
+    login_url = '/accounts/login/'
+    template_name = 'buyer/genre_vegetable.html'
+    def get(self, request):
+        products = Product.objects.all()
+        return render(request, self.template_name, {'products': products})
+
+
+class GenreDetailView(LoginRequiredMixin, View):
+    login_url = '/accounts/login/'
+    template_name = 'buyer/vegetable_list.html'
+    def get(self, request, genre_name):
+        if '-' in genre_name:
+            left_side, right_side = genre_name.split("-")
+            grains_items = Product.objects.filter(Q(main_genre_name=left_side) & Q(sub_genre_name=right_side)).values_list("item_name", flat=True)
+        else:
+            grains_items = Product.objects.filter(main_genre_name=genre_name).values_list("item_name", flat=True)
+        vegetables = Vegetable.objects.filter(item_name__in=grains_items)
+        return render(request, self.template_name, {'vegetables': vegetables})

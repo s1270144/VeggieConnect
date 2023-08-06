@@ -1,0 +1,30 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grid Layout with Buttons</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'buyer/css/genre.css' %}">
+</head>
+<body>
+    <div class="grid-container">
+        <div class="grid-item">
+            <a href="{% url 'buyer:genre_name' genre_name='Vegetables-LeafStem' %}" class="large-button"> 葉茎菜類 </a>
+        </div>
+        <div class="grid-item">
+            <a href="{% url 'buyer:genre_name' genre_name='Vegetables-Root' %}" class="large-button"> 根菜類 </a>
+        </div>
+        <div class="grid-item">
+            <a href="{% url 'buyer:genre_name' genre_name='Vegetables-Fruit' %}" class="large-button"> 果菜類 </a>
+        </div>
+        <div class="grid-item">
+            <a href="{% url 'buyer:genre_name' genre_name='Vegetables-Others' %}" class="large-button"> その他 </a>
+        </div>
+    </div>
+    <div class="back-container">
+        <a href="#" onclick="window.history.back();" class="back-btn">戻る</a>
+    </div>
+</body>
+</html>

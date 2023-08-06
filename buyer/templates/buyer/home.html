@@ -18,6 +18,7 @@
         border-radius: 5px;
         text-decoration: none;
         cursor: pointer;
+        z-index: 9999;
     }
 
     .productlist-selected-btn {
@@ -32,6 +33,7 @@
         border-radius: 5px;
         text-decoration: none;
         cursor: pointer;
+        z-index: 9999;
     }
 
 </style>
@@ -62,7 +64,7 @@
         </div>
         <div class="productlist-all-container">
             <a href="{% url 'buyer:vegetable_list' %}" class="productlist-all-btn">出品商品一覧</a>
-            <button class="productlist-selected-btn">ジャンルで選ぶ</button>
+            <a href="{% url 'buyer:genre' %}" class="productlist-selected-btn">ジャンルで選ぶ</a>
         </div>
         <div class="toggle-mode-container">
             <a href="{% url 'seller:home' %}" class="toggle-mode-btn">出品モード切替</a>
