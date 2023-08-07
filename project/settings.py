@@ -21,7 +21,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-89)q*fnrrxx2+07rf16a=7!izl3iei9vplnk3$1iiivk%7j5$b"
+# SECRET_KEY = "django-insecure-89)q*fnrrxx2+07rf16a=7!izl3iei9vplnk3$1iiivk%7j5$b"
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
@@ -31,8 +31,8 @@ ALLOWED_HOSTS = ['localhost', '.pythonanywhere.com', 'm5271010.pythonanywhere.co
 CSRF_COOKIE_SECURE = True
 SESSION_COOKIE_SECURE = True
 
-# from django.core.management.utils import get_random_secret_key
-# SECRET_KEY = get_random_secret_key()
+from django.core.management.utils import get_random_secret_key
+SECRET_KEY = get_random_secret_key()
 
 # Application definition
 
@@ -135,3 +135,8 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 LOGIN_REDIRECT_URL = 'buyer:home'
 LOGOUT_REDIRECT_URL = "accounts:index"
+
+try:
+    from .local_settings import *
+except:
+    pass

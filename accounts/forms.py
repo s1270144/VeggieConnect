@@ -15,8 +15,8 @@ class SignUpForm(UserCreationForm):
         labels = {
             'account_id': _('アカウントID'),
             'email': _('メールアドレス'),
-            'last_name': _('姓'),
-            'first_name': _('名'),
+            'last_name': _('姓(English)'),
+            'first_name': _('名(English)'),
             'birth_date': _('生年月日'),
             'is_seller': _('出品します。')
         }

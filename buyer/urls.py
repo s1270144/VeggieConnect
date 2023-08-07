@@ -1,7 +1,7 @@
 from django.urls import path
 from .views import (BuyerHomeView, VegetableListView, ProductDetailView,
                     PurchaseCompleteView, TransactionListView, TransactionDetailView,
-                    GenreFirstView, GenreVegetableView, GenreDetailView)
+                    GenreFirstView, GenreVegetableView, GenreDetailView, ErrorBCView, NothingProductView)
 
 app_name = "buyer"
 
@@ -15,4 +15,6 @@ urlpatterns = [
     path('purchase_complete/', PurchaseCompleteView.as_view(), name='purchase_complete'),
     path('transaction_list/', TransactionListView.as_view(), name='transaction_list'),
     path('transaction_list/<int:vegetable_id>/<uuid:transaction_id>/', TransactionDetailView.as_view(), name='transaction_detail'),
+    path('blockchain_error/', ErrorBCView.as_view(), name='blockchain_error'),
+    path('nothing_purchased_product/', NothingProductView.as_view(), name='nothing_purchased_product'),
 ]

@@ -101,25 +101,15 @@ class TransactionListView(LoginRequiredMixin, View):
             tx_list = get_tx(str(user))
             l = []
             try:
-                print(tx_list['output'])
                 for vege in tx_list['output']:
                     l.append(vege['item_id'])
                 vegetables = Vegetable.objects.filter(id__in=l)
                 vegetable_and_transaction = zip(vegetables, tx_list['output'])
                 return render(request, self.template_name, {'vegetable_and_transaction': vegetable_and_transaction})
-            except Exception as e:
-                print ('=== エラー内容 ===')
-                print ('type:' + str(type(e)))
-                print ('args:' + str(e.args))
-                print ('message:' + e.message)
-                print ('e自身:' + str(e))
-        except Exception as e:
-            print ('=== エラー内容 ===')
-            print ('type:' + str(type(e)))
-            print ('args:' + str(e.args))
-            print ('message:' + e.message)
-            print ('e自身:' + str(e))
-            return render(request, 'buyer/home.html')
+            except Exception as e: # 購入していない
+                return render(request, 'buyer/nothing_purchased_products.html')
+        except Exception as e: # blockchain api error
+            return render(request, 'buyer/bc_err.html')
 
 
 class TransactionDetailView(LoginRequiredMixin, View):
@@ -162,3 +152,16 @@ class GenreDetailView(LoginRequiredMixin, View):
             grains_items = Product.objects.filter(main_genre_name=genre_name).values_list("item_name", flat=True)
         vegetables = Vegetable.objects.filter(item_name__in=grains_items)
         return render(request, self.template_name, {'vegetables': vegetables})
+
+
+class ErrorBCView(LoginRequiredMixin, View):
+    login_url = '/accounts/login/'
+    template_name = 'buyer/bc_err.html'
+    def get(self, request):
+        return render(request, self.template_name)
+
+class NothingProductView(LoginRequiredMixin, View):
+    login_url = '/accounts/login/'
+    template_name = 'buyer/nothing_purchased_products.html'
+    def get(self, request):
+        return render(request, self.template_name)

@@ -3,3 +3,4 @@
 /doc/usecase.drawio
 .env
 db.sqlite3
+local_settings.py
