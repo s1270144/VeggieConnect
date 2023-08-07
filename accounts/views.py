@@ -8,6 +8,7 @@ from buyer.models import Buyer
 from seller.models import Seller
 from django.views import View
 from .forms import UserProfileForm
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 class IndexView(TemplateView):
@@ -43,7 +44,7 @@ class LogoutView(BaseLogoutView):
     success_url = reverse_lazy("accounts:index")
 
 
-class EditProfileView(View):
+class EditProfileView(LoginRequiredMixin, View):
     template_name = 'accounts/edit_profile.html'
 
     def get(self, request):

@@ -70,7 +70,10 @@ class ProductDetailView(LoginRequiredMixin, DetailView):
                 additional_info=additional_info
             )
             transaction.save()
-            set_info(purchase_id, str(user), str(item_id), str(purchase_price), str(quantity))
+            try:
+                set_info(purchase_id, str(user), str(item_id), str(purchase_price), str(quantity))
+            except:
+                pass
             # 在庫数と購入数を比較して、在庫を超えないようにする
             if quantity <= vegetable.total_quantity:
                 # 在庫数を更新
@@ -94,19 +97,29 @@ class TransactionListView(LoginRequiredMixin, View):
 
     def get(self, request):
         user = request.user.id
-        tx_list = get_tx(str(user))
-        l = []
         try:
-            print(tx_list['output'])
-            for vege in tx_list['output']:
-                l.append(vege['item_id'])
-            print(l)
-            vegetables = Vegetable.objects.filter(id__in=l)
-            vegetable_and_transaction = zip(vegetables, tx_list['output'])
-            return render(request, self.template_name, {'vegetable_and_transaction': vegetable_and_transaction})
-        except:
+            tx_list = get_tx(str(user))
+            l = []
+            try:
+                print(tx_list['output'])
+                for vege in tx_list['output']:
+                    l.append(vege['item_id'])
+                vegetables = Vegetable.objects.filter(id__in=l)
+                vegetable_and_transaction = zip(vegetables, tx_list['output'])
+                return render(request, self.template_name, {'vegetable_and_transaction': vegetable_and_transaction})
+            except Exception as e:
+                print ('=== エラー内容 ===')
+                print ('type:' + str(type(e)))
+                print ('args:' + str(e.args))
+                print ('message:' + e.message)
+                print ('e自身:' + str(e))
+        except Exception as e:
+            print ('=== エラー内容 ===')
+            print ('type:' + str(type(e)))
+            print ('args:' + str(e.args))
+            print ('message:' + e.message)
+            print ('e自身:' + str(e))
             return render(request, 'buyer/home.html')
-
 
 
 class TransactionDetailView(LoginRequiredMixin, View):

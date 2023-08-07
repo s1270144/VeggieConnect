@@ -24,10 +24,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-89)q*fnrrxx2+07rf16a=7!izl3iei9vplnk3$1iiivk%7j5$b"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '.pythonanywhere.com', 'm5271010.pythonanywhere.com']
 
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
+
+# from django.core.management.utils import get_random_secret_key
+# SECRET_KEY = get_random_secret_key()
 
 # Application definition
 
@@ -130,5 +135,3 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 LOGIN_REDIRECT_URL = 'buyer:home'
 LOGOUT_REDIRECT_URL = "accounts:index"
-
-DEBUG = False
