@@ -131,4 +131,4 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 LOGIN_REDIRECT_URL = 'buyer:home'
 LOGOUT_REDIRECT_URL = "accounts:index"
 
-DEBUG = True
+DEBUG = False
