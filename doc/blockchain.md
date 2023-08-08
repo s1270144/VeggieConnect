@@ -16,9 +16,9 @@
 
 ## 記録項目
 
-購入ID (purchase_id)：購入情報を一意に識別するためのID。
-ユーザID (user_id)：購入を行ったユーザのID。
-出品物ID (item_id)：購入された商品のID。
-購入日時 (purchase_date)：購入が行われた日時。
-購入価格 (purchase_price)：商品の購入価格。
-購入数量 (quantity)：購入した商品の数量。
+- 購入ID (purchase_id)：購入情報を一意に識別するためのID。
+- ユーザID (user_id)：購入を行ったユーザのID。
+- 出品物ID (item_id)：購入された商品のID。
+- 購入日時 (purchase_date)：購入が行われた日時。
+- 購入価格 (purchase_price)：商品の購入価格。
+- 購入数量 (quantity)：購入した商品の数量。
